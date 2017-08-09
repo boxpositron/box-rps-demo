@@ -1,0 +1,37 @@
+.rock
+{
+    display: none;
+
+    height: 200px;
+
+    background-color: #5a4d41;
+}
+.paper
+{
+    display: none;
+
+    height: 200px;
+
+    background-color: #f8ecc2;
+}
+
+.scissors
+{
+    display: none;
+
+    height: 200px;
+
+    background-color: #43464b;
+}
+
+
+.game-element
+{
+    width: auto;
+    height: 200px;
+    padding: 30px;
+}
+
+.background{
+    background-color: #212121;
+}
