@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-md-4 col-md-0ffset-4 col-sm-4 col-sm-offset-4 col-xs-12">
                     
-                    <div id="card-area" style="background-color: black;" class="animated text-center">
+                    <div id="card-area" style="background-color: black;" class="animated fadeIn text-center">
                         <img id="card" src="/images/logo.png" alt="card" class="game-element">
                     </div>
                 </div>
@@ -67,10 +67,7 @@
                 </div>
             </div>
         </div>
-        <script
-        src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-        crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script>
@@ -110,18 +107,6 @@
             playbtn.prop('disabled', false);
         }
 
-        function showTile(tile) {
-            tile.removeClass("fadeOut");
-            tile.show();
-            tile.addClass("fadeIn").delay(2000);
-        }
-
-        function hideTile(tile) {
-            tile.removeClass("fadeIn");
-            tile.addClass("fadeOut").delay(2000)
-            tile.hide()
-        }
-
         function playGame() {
             var tile;
             var result = getRandomInt(1, 4);
@@ -132,7 +117,7 @@
             } else if (result == 3) {
                 scissors();
             }
-            setTimeout(resetBoard, 3000, tile);
+            setTimeout(resetBoard, 1000, tile);
         }
 
         function resetBoard(tile) {
