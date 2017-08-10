@@ -2,15 +2,40 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Rock Paper Scissors</title>
         
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rock Paper Scissors</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" href="/stylesheets/rps.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <style>
+        .rock
+        {
+        height: 200px;
+        background-color: #5a4d41 !important;
+        }
+        .paper
+        {
+        height: 200px;
+        background-color: #f8ecc2 !important;
+        }
+        .scissors
+        {
+        height: 200px;
+        background-color: #43464b !important;
+        }
+        .game-element
+        {
+        width: auto;
+        height: 200px;
+        padding: 30px;
+        }
+        .background{
+        background-color: #212121;
+        }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -20,9 +45,6 @@
                 </div>
             </div>
         </nav>
-
-
-
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">
@@ -31,38 +53,102 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div id="rock" class="rock text-center">
-                        <img  class="game-element" src="/images/rock.png" alt="rock">
-                        
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div id="paper" class="paper text-center">
-                        
-                        <img class="game-element"  src="/images/paper.png" alt="paper">
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div id="scissors" class="scissors text-center">
-                        <img  class="game-element" src="/images/scissors.png" alt="scissors">
+                <div class="col-md-4 col-md-0ffset-4 col-sm-4 col-sm-offset-4 col-xs-12">
+                    
+                    <div id="card-area" style="background-color: black;" class="animated text-center">
+                        <img id="card" src="/images/logo.png" alt="card" class="game-element">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div style="padding-top: 20px;"></div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <button id="play" onclick="playGame()" class="btn btn-info btn-block">Play</button>
+                <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-12">
+                    <button id="play" onclick="playGame()" class="btn btn-success btn-block">Play</button>
                 </div>
             </div>
         </div>
-
-        <script src="/javascripts/rps.js"></script>
         <script
         src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
         crossorigin="anonymous"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script>
+
+        var card = $("#card");
+        var cardarea = $("#card-area");
+        var playbtn = $("#play");
+
+        $(document).ready(function() {
+            // animate();
+        })
+
+        function rock () {
+            var path = "/images/rock.png";
+            cardarea.addClass("rock");
+            card.attr('src', path);
+        }
+
+        function paper () {
+            var path = "/images/paper.png";
+            cardarea.addClass("paper");
+            card.attr('src', path);
+
+        }
+
+        function scissors () {
+            var path = "/images/scissors.png";
+            cardarea.addClass("scissors");
+            card.attr('src', path);
+
+        }
+
+
+        function animate() {
+            playbtn.prop('disabled', true);
+            rock();paper();scissors();
+            playbtn.prop('disabled', false);
+        }
+
+        function showTile(tile) {
+            tile.removeClass("fadeOut");
+            tile.show();
+            tile.addClass("fadeIn").delay(2000);
+        }
+
+        function hideTile(tile) {
+            tile.removeClass("fadeIn");
+            tile.addClass("fadeOut").delay(2000)
+            tile.hide()
+        }
+
+        function playGame() {
+            var tile;
+            var result = getRandomInt(1, 4);
+            if (result == 1) {
+                rock();
+            } else if (result == 2) {
+                paper();
+            } else if (result == 3) {
+                scissors();
+            }
+            setTimeout(resetBoard, 3000, tile);
+        }
+
+        function resetBoard(tile) {
+            card.attr('src','/images/logo.png')
+            cardarea.removeClass("rock");
+            cardarea.removeClass("paper");
+            cardarea.removeClass("scissors");
+
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
+        </script>
+        
     </body>
 </html>
